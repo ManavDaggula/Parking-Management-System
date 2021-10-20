@@ -56,7 +56,6 @@ public class MenuPage {
 				l3.setOpaque(true);
 				l3.setVisible(true);
 				
-				
 				imageLabel.add(l1);
 				imageLabel.add(l2);
 				imageLabel.add(l3);
