@@ -18,17 +18,17 @@ public class Login {
 
 	Login(){
 	//this.loginScreen.setResizable(false);
-	this.loginScreen.setLayout(null);
-	this.backImage.setIcon(new ImageIcon("/home/manav/eclipse-workspace/ParkingManagementSystem/src/images/login.jpeg"));
-	this.backImage.setBounds(0,0,600, 390);
-	this.nextButton.setBounds(450,305,100,28);
-	this.nextButton.setBackground(new Color(0,0,0));
-	this.nextButton.setBorderPainted(false);
-	this.nextButton.setForeground(new Color(255,255,255));
-	this.loginScreen.add(nextButton);
-	this.loginScreen.add(backImage);
-	this.nextButton.setFocusable(false);
-	this.nextButton.addActionListener(new ActionListener() {
+	loginScreen.setLayout(null);
+	backImage.setIcon(new ImageIcon("src/images/login.jpeg"));
+	backImage.setBounds(0,0,600, 390);
+	nextButton.setBounds(450,305,100,28);
+	nextButton.setBackground(new Color(0,0,0));
+	nextButton.setBorderPainted(false);
+	nextButton.setForeground(new Color(255,255,255));
+	loginScreen.add(nextButton);
+	loginScreen.add(backImage);
+	nextButton.setFocusable(false);
+	nextButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent ae) {
 			if (ae.getSource()==nextButton) {
 				new SignInScreen();
@@ -37,8 +37,8 @@ public class Login {
 		}
 	});
 	//this.loginScreen.pack();
-	this.loginScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	this.loginScreen.setSize(600, 37+ 390);
+	loginScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	loginScreen.setSize(600, 37+ 390);
 	//Insets i = loginScreen.getInsets();
 	//System.out.println(i);
 	//this.loginScreen.setUndecorated(true);
