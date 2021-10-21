@@ -12,7 +12,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JTextField;
 //import javax.swing.JPanel;
-
+//just for commit
 public class MenuPage {
 
 	public JFrame menuFrame = new JFrame();
