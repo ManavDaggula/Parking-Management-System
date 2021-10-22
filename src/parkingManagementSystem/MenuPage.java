@@ -4,26 +4,24 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JTextField;
+
 //import javax.swing.JPanel;
 //just for commit
-public class MenuPage {
+public class MenuPage implements ActionListener{
 
 	public JFrame menuFrame = new JFrame();
     //public JPanel entryMenuPanel = new JPanel();
 	public JMenuBar menuBar = new JMenuBar();
 	public JMenuItem entry, exit, search;
     public JLabel imageLabel = new JLabel();
-	public JLabel l1 = new JLabel();
-	public JLabel l2 = new JLabel();
-	public JLabel l3 = new JLabel();
-	public JTextField t1 = new JTextField();
     MenuPage(){
     	
     	entry = new JMenuItem("Entry");
@@ -41,32 +39,8 @@ public class MenuPage {
     	menuBar.setBounds(0,0,1366,50);
     	
     	//adding actionListeners to entry exit and search
-    	entry.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent ae){
-				l1.setText("License Number");
-				l1.setBounds(100, 100, 150, 50);
-				l1.setOpaque(true);
-				l1.setVisible(true);
-				l2.setText("Name");
-				l2.setBounds(100,200,150,50);
-				l2.setOpaque(true);
-				l2.setVisible(true);
-				l3.setText("Phone Number");
-				l3.setBounds(100,300,150,50);
-				l3.setOpaque(true);
-				l3.setVisible(true);
-				
-				imageLabel.add(l1);
-				imageLabel.add(l2);
-				imageLabel.add(l3);
-				//menuFrame.pack();
-				menuFrame.setSize(1366,719);
-				menuFrame.setSize(1366,720);
-				//menuFrame.setVisible(false);
-				//menuFrame.setVisible(true);
-			}
-		});
-    	
+    	entry.addActionListener(this);
+		
     	//trying the weird color change solution
     	entry.setOpaque(true);
     	entry.setBackground(new Color(128,50,200));
@@ -90,11 +64,62 @@ public class MenuPage {
         
         menuFrame.add(menuBar);
         menuFrame.add(imageLabel);
-        //imageLabel.add(entryMenuPanel);
+        //imageLabel.add(entryMenuPanel); 
         menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menuFrame.setVisible(true);
     }
     
+    public void actionPerformed(ActionEvent ae){
+		if (ae.getSource()==entry){
+			entry.setEnabled(false);
+			EntryPage m = new EntryPage();
+			//while(m.frame.isDisplayable()) {}
+			m.frame.addWindowListener(new WindowListener() {
+				@Override
+				public void windowOpened(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void windowClosing(WindowEvent e) {
+					entry.setEnabled(true);
+					
+				}
+
+				@Override
+				public void windowClosed(WindowEvent e) {
+					entry.setEnabled(true);
+					
+				}
+
+				@Override
+				public void windowIconified(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void windowDeiconified(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void windowActivated(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void windowDeactivated(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+	        });
+			//entry.setEnabled(false);
+		}
+	}
     
     public static void main(String args[]){
         new MenuPage();
