@@ -1,11 +1,15 @@
 package parkingManagementSystem;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,7 +18,7 @@ import javax.swing.JTextField;
 
 public class EntryPage implements ActionListener{
 	JFrame frame;
-	JLabel licenseL, fNameL, lNameL, pNoL;
+	JLabel licenseL, fNameL, lNameL, pNoL, imageLabel1, imageLabel2;
 	JTextField licenseT, fNameT, lNameT, pNoT;
 	JButton enterB, closeB;
 	
@@ -35,31 +39,51 @@ public class EntryPage implements ActionListener{
 		pNoL.setBounds(10,190,200,50);
 		//pNoL.setOpaque(true);
 		//pNoL.setBackground(Color.BLACK);
+		imageLabel1 = new JLabel();
+		ImageIcon i1 = new ImageIcon("src/images/Entry1.png");
+		Image i2 = i1.getImage();
+		Image i3 = i2.getScaledInstance(150,150,Image.SCALE_DEFAULT);
+		i1 = new ImageIcon(i3);
+		imageLabel1.setIcon(i1);
+		imageLabel1.setBounds(550,140,150,150);
+		imageLabel2 = new JLabel();
+		i1 = new ImageIcon("src/images/Entry2.png");
+		i2 = i1.getImage();
+		i3 = i2.getScaledInstance(250,100,Image.SCALE_DEFAULT);
+		i1 = new ImageIcon(i3);
+		imageLabel2.setIcon(i1);
+		imageLabel2.setBounds(500,10,250,100);
 		licenseT = new JTextField();
-		licenseT.setBounds(250,10,200,50);
+		licenseT.setBounds(250,10,150,45);
 		//licenseT.setOpaque(true);
 		//licenseT.setBackground(Color.BLACK);
 		fNameT = new JTextField();
-		fNameT.setBounds(250,70,200,50);
+		fNameT.setBounds(250,70,150,45);
 		//fNameT.setOpaque(true);
 		//fNameT.setBackground(Color.BLACK);
 		lNameT = new JTextField();
-		lNameT.setBounds(250,130,200,50);
+		lNameT.setBounds(250,130,150,45);
 		//lNameT.setOpaque(true);
 		//lNameT.setBackground(Color.BLACK);
 		pNoT = new JTextField();
-		pNoT.setBounds(250,190,200,50);
+		pNoT.setBounds(250,190,150,45);
 		//pNoT.setOpaque(true);
 		//pNoT.setBackground(Color.BLACK);
 		enterB = new JButton("Enter");
 		enterB.addActionListener(this);
-		enterB.setBounds(10,250,200,50);
+		enterB.setBounds(60,250,100,40);
+		enterB.setBackground(Color.BLACK);
+		enterB.setForeground(Color.WHITE);
 		closeB = new JButton("Close");
 		closeB.addActionListener(this);
-		closeB.setBounds(250,250,200,50);
+		closeB.setBounds(250,250,100,40);
+		closeB.setBackground(Color.BLACK);
+		closeB.setForeground(Color.WHITE);
 		
 		frame = new JFrame();
 		frame.setLayout(null);
+		frame.add(imageLabel1);
+		frame.add(imageLabel2);
 		frame.add(licenseL);
 		frame.add(fNameL);
 		frame.add(lNameL);
@@ -70,9 +94,10 @@ public class EntryPage implements ActionListener{
 		frame.add(pNoT);
 		frame.add(enterB);
 		frame.add(closeB);
+		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setBounds((d.width-500)/2,(d.height-400)/2,500,400);
+		frame.setBounds((d.width-800)/2,(d.height-350)/2,800,350);
 		frame.setVisible(true);
 	}
 	public boolean checkInfo(String fn,String ln, String lic,String pno) {
@@ -111,7 +136,8 @@ public class EntryPage implements ActionListener{
 				System.out.println("checking done");
 				//SQL queries below here
 				ConnectionToMySQL c = new ConnectionToMySQL();
-				String query,time;
+				String query;
+				Timestamp time;
 				int cid,pid;
 				ResultSet rs;
 				
@@ -120,17 +146,22 @@ public class EntryPage implements ActionListener{
 					query = "select customer_id from customer where first_name='"+fname+"' and last_name='"+lname+"' and phone_number = '"+phoneNumber+"';";
 					rs = c.s.executeQuery(query);
 					if(rs.next()) {
+						//this works fine
 						cid = rs.getInt("customer_id");
+						System.out.println("cid ="+cid);
 					}
 					else {//customer does not exists, hence creating customer
-						query = "select max(customer_id) from customer;";
+						//this does not work fine, error in rs.get... line
+						query = "select max(customer_id) as max from customer;";
 						rs = c.s.executeQuery(query);
-						cid = rs.getInt("max(customer_id)");
+						rs.next();
+						cid = rs.getInt("max");
 						cid++;
 						query = "insert into customer values("+cid+",'"+fname+"','"+lname+"','"+phoneNumber+"');";
 						c.s.executeUpdate(query);
 					}
 					//checking if vehicle exits
+					//this also works fine
 					query = "select * from vehicle where license_plate_no = '"+licenseP+"';";
 					rs = c.s.executeQuery(query);
 					if(!rs.next()) {
@@ -147,14 +178,18 @@ public class EntryPage implements ActionListener{
 					 *}
 					 */
 					//to add the vehicle in parking, we check for empty spaces
-					query = "select sysdate();";
+					//gives error in rs.get... line
+					query = "select sysdate() as time;";
 					rs = c.s.executeQuery(query);
-					time = rs.getString("sysdate()");
-					query = "select space_id from parking_space where vehicle_parked=null;";
+					rs.next();
+					time = rs.getTimestamp("time");
+					query = "select space_id from parking_space where vehicle_parked is NULL;";
 					rs = c.s.executeQuery(query);
+					//System.out.println(rs);
 					if(rs.next()) {
 						pid = rs.getInt("space_id");
 						query = "update parking_space set vehicle_parked='"+licenseP+"', in_time='"+time+"' where space_id="+pid+";";
+						c.s.executeUpdate(query);
 						JOptionPane.showMessageDialog(frame,"Entry for vehicle is done");
 					}
 					else {

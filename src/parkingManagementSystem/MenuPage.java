@@ -27,10 +27,10 @@ public class MenuPage implements ActionListener{
     	entry = new JMenuItem("Entry");
     	exit = new JMenuItem("Exit");
     	search = new JMenuItem("Search");
-    	menuBar.setBackground(new Color(128,50,200));
-    	entry.setForeground(Color.YELLOW);
-    	exit.setForeground(Color.YELLOW);
-    	search.setForeground(Color.YELLOW);
+    	menuBar.setBackground(Color.WHITE);
+    	entry.setForeground(Color.BLUE);
+    	exit.setForeground(Color.BLUE);
+    	search.setForeground(Color.BLUE);
     	entry.setFocusPainted(false);
     	menuBar.add(entry);
     	menuBar.add(exit);
@@ -42,14 +42,14 @@ public class MenuPage implements ActionListener{
     	entry.addActionListener(this);
 		
     	//trying the weird color change solution
-    	entry.setOpaque(true);
-    	entry.setBackground(new Color(128,50,200));
-    	exit.setFocusPainted(false);
-    	exit.setOpaque(true);
-    	exit.setBackground(new Color(128,50,200));
-    	search.setFocusPainted(false);
-    	search.setOpaque(true);
-    	search.setBackground(new Color(128,50,200));
+    	//entry.setOpaque(true);
+    	entry.setBackground(Color.WHITE);
+    	//exit.setFocusPainted(false);
+    	//exit.setOpaque(true);
+    	exit.setBackground(Color.WHITE);
+    	//search.setFocusPainted(false);
+    	//search.setOpaque(true);
+    	search.setBackground(Color.WHITE);
     	//entryMenuPanel.setLayout(null);
     	//entryMenuPanel.setBounds(0,50,1366,670);
     	//entryMenuPanel.setOpaque(true);
