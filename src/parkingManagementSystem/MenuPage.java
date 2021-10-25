@@ -55,7 +55,9 @@ public class MenuPage implements ActionListener{
     	//entryMenuPanel.setOpaque(true);
     	//entryMenuPanel.setBackground(new Color(0,0,0,0));
     	menuFrame.setLayout(null);
-    	menuFrame.setBounds(0,0,1366,720);
+    	menuFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    	//Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+    	//menuFrame.setBounds(0,0,d.width,d.height);
     	imageLabel = new JLabel("");
         imageLabel.setIcon(new ImageIcon(new ImageIcon(ClassLoader.getSystemResource("images/EmptyParkingLot.jpg")).getImage().getScaledInstance(1366,720,Image.SCALE_DEFAULT)));
         imageLabel.setSize(1366,720);
@@ -64,6 +66,7 @@ public class MenuPage implements ActionListener{
         
         menuFrame.add(menuBar);
         menuFrame.add(imageLabel);
+        menuFrame.setIconImage(new ImageIcon("src/images/CarParking.png").getImage());
         //imageLabel.add(entryMenuPanel); 
         menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menuFrame.setVisible(true);
