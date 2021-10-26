@@ -106,14 +106,13 @@ public class EntryPage implements ActionListener{
 		lic = lic.trim();
 		pno = pno.trim();
 		if(fn.matches("[a-zA-Z]+")  && ln.matches("[a-zA-Z]+") && pno.matches("[0-9]+") && pno.length()==10 && lic.length()==10){
-			//Until here everything except license plate is checked
 			//checking license plate validity below
 			String p1 = lic.substring(0,2);
 			String p2 = lic.substring(2,4);
 			String p3 = lic.substring(4,6);
 			String p4 = lic.substring(6,10);
 			if (p1.matches("[A-Z]+") && p2.matches("[0-9]+") && p3.matches("[A-Z]+") && p4.matches("[0-9]+")) {
-				System.out.println("correct");
+				//System.out.println("correct");
 				return true;
 			}
 		}
@@ -129,11 +128,11 @@ public class EntryPage implements ActionListener{
 			licenseP = licenseT.getText().trim().toUpperCase();
 			phoneNumber = pNoT.getText().trim().toUpperCase();
 			check = checkInfo(fname,lname,licenseP,phoneNumber);
-			System.out.println(fname + " " + lname + "\n" + licenseP + "\n" + phoneNumber);
+			//System.out.println(fname + " " + lname + "\n" + licenseP + "\n" + phoneNumber);
 			
 			
 			if(check==true) {
-				System.out.println("checking done");
+				//System.out.println("checking done");
 				//SQL queries below here
 				ConnectionToMySQL c = new ConnectionToMySQL();
 				String query;
@@ -146,12 +145,10 @@ public class EntryPage implements ActionListener{
 					query = "select customer_id from customer where first_name='"+fname+"' and last_name='"+lname+"' and phone_number = '"+phoneNumber+"';";
 					rs = c.s.executeQuery(query);
 					if(rs.next()) {
-						//this works fine
 						cid = rs.getInt("customer_id");
-						System.out.println("cid ="+cid);
+						//System.out.println("cid ="+cid);
 					}
 					else {//customer does not exists, hence creating customer
-						//this does not work fine, error in rs.get... line
 						query = "select max(customer_id) as max from customer;";
 						rs = c.s.executeQuery(query);
 						rs.next();
@@ -161,7 +158,6 @@ public class EntryPage implements ActionListener{
 						c.s.executeUpdate(query);
 					}
 					//checking if vehicle exits
-					//this also works fine
 					query = "select * from vehicle where license_plate_no = '"+licenseP+"';";
 					rs = c.s.executeQuery(query);
 					if(!rs.next()) {
@@ -185,12 +181,11 @@ public class EntryPage implements ActionListener{
 					time = rs.getTimestamp("time");
 					query = "select space_id from parking_space where vehicle_parked is NULL;";
 					rs = c.s.executeQuery(query);
-					//System.out.println(rs);
 					if(rs.next()) {
 						pid = rs.getInt("space_id");
 						query = "update parking_space set vehicle_parked='"+licenseP+"', in_time='"+time+"' where space_id="+pid+";";
 						c.s.executeUpdate(query);
-						JOptionPane.showMessageDialog(frame,"Entry for vehicle is done");
+						JOptionPane.showMessageDialog(frame,"Entry for vehicle is done.\n Alotted space is "+pid);
 					}
 					else {
 						JOptionPane.showMessageDialog(frame,"Sorry, we are out of space now.");

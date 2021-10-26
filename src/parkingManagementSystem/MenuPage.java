@@ -1,7 +1,9 @@
 package parkingManagementSystem;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -10,31 +12,39 @@ import java.awt.event.WindowListener;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-//import javax.swing.JPanel;
-//just for commit
 public class MenuPage implements ActionListener{
 
 	public JFrame menuFrame = new JFrame();
-    //public JPanel entryMenuPanel = new JPanel();
-	public JMenuBar menuBar = new JMenuBar();
-	public JMenuItem entry, exit, search;
+    public JMenuBar menuBar = new JMenuBar();
+	public JMenuItem entry, exit, search,show_parking_space;
+	public JMenu display;
     public JLabel imageLabel = new JLabel();
     MenuPage(){
     	
     	entry = new JMenuItem("Entry");
-    	exit = new JMenuItem("Exit");
-    	search = new JMenuItem("Search");
-    	menuBar.setBackground(Color.WHITE);
     	entry.setForeground(Color.BLUE);
+    	exit = new JMenuItem("Exit");
     	exit.setForeground(Color.BLUE);
+    	search = new JMenuItem("Search");
     	search.setForeground(Color.BLUE);
-    	entry.setFocusPainted(false);
+    	show_parking_space = new JMenuItem("Show Parking Space");
+    	show_parking_space.addActionListener(this);
+    	
+    	
+    	//entry.setFocusPainted(false);
+    	
+    	display = new JMenu("Display");
+    	display.add(show_parking_space);
+    	
+    	menuBar.setBackground(Color.WHITE);
     	menuBar.add(entry);
     	menuBar.add(exit);
     	menuBar.add(search);
+    	menuBar.add(display);
     	//menuBar.setBorderPainted(false);
     	menuBar.setBounds(0,0,1366,50);
     	
@@ -50,24 +60,19 @@ public class MenuPage implements ActionListener{
     	//search.setFocusPainted(false);
     	//search.setOpaque(true);
     	search.setBackground(Color.WHITE);
-    	//entryMenuPanel.setLayout(null);
-    	//entryMenuPanel.setBounds(0,50,1366,670);
-    	//entryMenuPanel.setOpaque(true);
-    	//entryMenuPanel.setBackground(new Color(0,0,0,0));
     	menuFrame.setLayout(null);
     	menuFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-    	//Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-    	//menuFrame.setBounds(0,0,d.width,d.height);
+    	
     	imageLabel = new JLabel("");
         imageLabel.setIcon(new ImageIcon(new ImageIcon(ClassLoader.getSystemResource("images/EmptyParkingLot.jpg")).getImage().getScaledInstance(1366,720,Image.SCALE_DEFAULT)));
         imageLabel.setSize(1366,720);
         imageLabel.setLocation(0,0);
         
-        
         menuFrame.add(menuBar);
         menuFrame.add(imageLabel);
         menuFrame.setIconImage(new ImageIcon("src/images/CarParking.png").getImage());
-        //imageLabel.add(entryMenuPanel); 
+        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+    	menuFrame.setBounds(0,0,d.width,d.height);
         menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menuFrame.setVisible(true);
     }
@@ -79,10 +84,7 @@ public class MenuPage implements ActionListener{
 			//while(m.frame.isDisplayable()) {}
 			m.frame.addWindowListener(new WindowListener() {
 				@Override
-				public void windowOpened(WindowEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
+				public void windowOpened(WindowEvent e) {}
 
 				@Override
 				public void windowClosing(WindowEvent e) {
@@ -97,30 +99,21 @@ public class MenuPage implements ActionListener{
 				}
 
 				@Override
-				public void windowIconified(WindowEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
+				public void windowIconified(WindowEvent e) {}
 
 				@Override
-				public void windowDeiconified(WindowEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
+				public void windowDeiconified(WindowEvent e) {}
 
 				@Override
-				public void windowActivated(WindowEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
+				public void windowActivated(WindowEvent e) {}
 
 				@Override
-				public void windowDeactivated(WindowEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
+				public void windowDeactivated(WindowEvent e) {}
 	        });
 			//entry.setEnabled(false);
+		}
+		else if(ae.getSource()==show_parking_space) {
+			new DisplayParkingLot();
 		}
 	}
     
