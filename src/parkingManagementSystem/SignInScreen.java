@@ -65,12 +65,13 @@ public class SignInScreen {
 				try {
 					ResultSet rs = c.s.executeQuery("select * from login where username = '" + usname + "' and password = '" + passwd + "';");
 					if(rs.next()) {
-						new MenuPage();
-						f.setVisible(false);
+						//new MenuPage();
+						new Dashboard().setVisible(true);
+						f.dispose();
 					}
 					else {
 						JOptionPane.showMessageDialog(f,"Enter valid credentials");
-						System.out.println("nope");
+						//System.out.println("nope");
 					}
 				} catch (Exception e) {
 					

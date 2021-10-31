@@ -2,6 +2,7 @@ package parkingManagementSystem;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -9,34 +10,46 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class EntryPage implements ActionListener{
 	JFrame frame;
-	JLabel licenseL, fNameL, lNameL, pNoL, imageLabel1, imageLabel2;
+	JLabel licenseL, fNameL, lNameL, pNoL, genderLabel, imageLabel1, imageLabel2;
 	JTextField licenseT, fNameT, lNameT, pNoT;
 	JButton enterB, closeB;
+	JRadioButton male,female;
+	ButtonGroup gender;
 	
 	EntryPage(){
 		licenseL = new JLabel("License Plate Number");
 		licenseL.setBounds(10,10,200,50);
+		licenseL.setFont(new Font("Tahoma",Font.PLAIN,14));
 		//licenseL.setOpaque(true);
 		//licenseL.setBackground(Color.BLACK);
 		fNameL = new JLabel("First Name");
 		fNameL.setBounds(10,70,200,50);
+		fNameL.setFont(new Font("Tahoma",Font.PLAIN,14));
 		//fNameL.setOpaque(true);
 		//fNameL.setBackground(Color.BLACK);
 		lNameL = new JLabel("Last Name");
 		lNameL.setBounds(10,130,200,50);
+		lNameL.setFont(new Font("Tahoma",Font.PLAIN,14));
 		//lNameL.setOpaque(true);
-		//lNameL.setBackground(Color.BLACK);
+		//lNameL.setBackground(Color.BLACK);\
+		genderLabel = new JLabel("Gender");
+		genderLabel.setBounds(10,190,200,50);
+		genderLabel.setFont(new Font("Tahoma",Font.PLAIN,14));
+		
 		pNoL = new JLabel("Phone Number");
-		pNoL.setBounds(10,190,200,50);
+		pNoL.setBounds(10,250,200,50);
+		pNoL.setFont(new Font("Tahoma",Font.PLAIN,14));
 		//pNoL.setOpaque(true);
 		//pNoL.setBackground(Color.BLACK);
 		imageLabel1 = new JLabel();
@@ -55,30 +68,47 @@ public class EntryPage implements ActionListener{
 		imageLabel2.setBounds(500,10,250,100);
 		licenseT = new JTextField();
 		licenseT.setBounds(250,10,150,45);
+		licenseT.setFont(new Font("Tahoma",Font.PLAIN,14));
 		//licenseT.setOpaque(true);
 		//licenseT.setBackground(Color.BLACK);
 		fNameT = new JTextField();
 		fNameT.setBounds(250,70,150,45);
+		fNameT.setFont(new Font("Tahoma",Font.PLAIN,14));
 		//fNameT.setOpaque(true);
 		//fNameT.setBackground(Color.BLACK);
 		lNameT = new JTextField();
 		lNameT.setBounds(250,130,150,45);
+		lNameT.setFont(new Font("Tahoma",Font.PLAIN,14));
 		//lNameT.setOpaque(true);
 		//lNameT.setBackground(Color.BLACK);
+		male = new JRadioButton("Male");
+		female = new JRadioButton("Female");
+		male.setBounds(250,190,60,45);
+		female.setBounds(320,190,100,45);
+		male.setBackground(Color.WHITE);
+		female.setBackground(Color.WHITE);
+		male.setFont(new Font("Tahoma",Font.PLAIN,14));
+		female.setFont(new Font("Tahoma",Font.PLAIN,14));
+		gender = new ButtonGroup();
+		gender.add(male);
+		gender.add(female);
 		pNoT = new JTextField();
-		pNoT.setBounds(250,190,150,45);
+		pNoT.setBounds(250,250,150,45);
+		pNoT.setFont(new Font("Tahoma",Font.PLAIN,14));
 		//pNoT.setOpaque(true);
 		//pNoT.setBackground(Color.BLACK);
 		enterB = new JButton("Enter");
 		enterB.addActionListener(this);
-		enterB.setBounds(60,250,100,40);
+		enterB.setBounds(60,310,100,40);
 		enterB.setBackground(Color.BLACK);
 		enterB.setForeground(Color.WHITE);
+		enterB.setFont(new Font("Tahoma",Font.PLAIN,14));
 		closeB = new JButton("Close");
 		closeB.addActionListener(this);
-		closeB.setBounds(250,250,100,40);
+		closeB.setBounds(250,310,100,40);
 		closeB.setBackground(Color.BLACK);
 		closeB.setForeground(Color.WHITE);
+		closeB.setFont(new Font("Tahoma",Font.PLAIN,14));
 		
 		frame = new JFrame();
 		frame.setLayout(null);
@@ -87,17 +117,20 @@ public class EntryPage implements ActionListener{
 		frame.add(licenseL);
 		frame.add(fNameL);
 		frame.add(lNameL);
+		frame.add(genderLabel);
 		frame.add(pNoL);
 		frame.add(licenseT);
 		frame.add(fNameT);
 		frame.add(lNameT);
+		frame.add(male);
+		frame.add(female);
 		frame.add(pNoT);
 		frame.add(enterB);
 		frame.add(closeB);
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setBounds((d.width-800)/2,(d.height-350)/2,800,350);
+		frame.setBounds((d.width-800)/2,(d.height-410)/2,800,410);
 		frame.setVisible(true);
 	}
 	public boolean checkInfo(String fn,String ln, String lic,String pno) {
@@ -105,7 +138,7 @@ public class EntryPage implements ActionListener{
 		ln = ln.trim();
 		lic = lic.trim();
 		pno = pno.trim();
-		if(fn.matches("[a-zA-Z]+")  && ln.matches("[a-zA-Z]+") && pno.matches("[0-9]+") && pno.length()==10 && lic.length()==10){
+		if(fn.matches("[a-zA-Z]+")  && ln.matches("[a-zA-Z]+") && pno.matches("[0-9]+") && pno.length()==10 && lic.length()==10 &&(male.isSelected() || female.isSelected())){
 			//checking license plate validity below
 			String p1 = lic.substring(0,2);
 			String p2 = lic.substring(2,4);
@@ -128,6 +161,11 @@ public class EntryPage implements ActionListener{
 			licenseP = licenseT.getText().trim().toUpperCase();
 			phoneNumber = pNoT.getText().trim().toUpperCase();
 			check = checkInfo(fname,lname,licenseP,phoneNumber);
+			char gender='\0';
+			if(male.isSelected())
+				gender='M';
+			else if (female.isSelected())
+				gender='F';
 			//System.out.println(fname + " " + lname + "\n" + licenseP + "\n" + phoneNumber);
 			
 			
@@ -135,62 +173,31 @@ public class EntryPage implements ActionListener{
 				//System.out.println("checking done");
 				//SQL queries below here
 				ConnectionToMySQL c = new ConnectionToMySQL();
-				String query;
+				String query,pid;
 				Timestamp time;
-				int cid,pid;
 				ResultSet rs;
 				
 				try {
-					//checking if customer exists
-					query = "select customer_id from customer where first_name='"+fname+"' and last_name='"+lname+"' and phone_number = '"+phoneNumber+"';";
+					query = "select spot_name from parking_lot_space where occupancy is null;";
 					rs = c.s.executeQuery(query);
-					if(rs.next()) {
-						cid = rs.getInt("customer_id");
-						//System.out.println("cid ="+cid);
-					}
-					else {//customer does not exists, hence creating customer
-						query = "select max(customer_id) as max from customer;";
+					if(rs.next()){
+						pid = rs.getString(1);
+						//System.out.println(pid);
+						/*query = "select sysdate();";
 						rs = c.s.executeQuery(query);
 						rs.next();
-						cid = rs.getInt("max");
-						cid++;
-						query = "insert into customer values("+cid+",'"+fname+"','"+lname+"','"+phoneNumber+"');";
+						time = rs.getTimestamp(1);*/
+						time = new Timestamp(System.currentTimeMillis());
+						query = "insert into customer_info values('"+licenseP+"','"+fname+"','"+lname+"','"+phoneNumber+"','"+gender+"','"+time+"');";
+						//System.out.println(time);
 						c.s.executeUpdate(query);
-					}
-					//checking if vehicle exits
-					query = "select * from vehicle where license_plate_no = '"+licenseP+"';";
-					rs = c.s.executeQuery(query);
-					if(!rs.next()) {
-						query = "insert into vehicle values('"+licenseP+"',"+cid+");";
+						query = "update parking_lot_space set occupancy='"+licenseP+"' where spot_name='"+pid+"';";
 						c.s.executeUpdate(query);
-					}
-					/*query = "select * from vehicle where license_plate_no = '"+licenseP+"';";
-					 *rs = c.s.executeQuery(query);
-					 *if(rs.getInt("owner")!=cid) {
-					 *	//now if there are more than one people possessing the same car then there will be a problem which is not accounted for by the below solution
-					 *	//you will have to create multivalued attributes in mysql to solve the problem
-					 *	//for now we are doing nothing
-					 *	//we simply add the vehicle
-					 *}
-					 */
-					//to add the vehicle in parking, we check for empty spaces
-					//gives error in rs.get... line
-					query = "select sysdate() as time;";
-					rs = c.s.executeQuery(query);
-					rs.next();
-					time = rs.getTimestamp("time");
-					query = "select space_id from parking_space where vehicle_parked is NULL;";
-					rs = c.s.executeQuery(query);
-					if(rs.next()) {
-						pid = rs.getInt("space_id");
-						query = "update parking_space set vehicle_parked='"+licenseP+"', in_time='"+time+"' where space_id="+pid+";";
-						c.s.executeUpdate(query);
-						JOptionPane.showMessageDialog(frame,"Entry for vehicle is done.\n Alotted space is "+pid);
+						JOptionPane.showMessageDialog(frame,"Entry done.","",JOptionPane.INFORMATION_MESSAGE);
 					}
 					else {
-						JOptionPane.showMessageDialog(frame,"Sorry, we are out of space now.");
+						JOptionPane.showMessageDialog(frame,"Sorry, We are out of space!","",JOptionPane.INFORMATION_MESSAGE);
 					}
-					
 					frame.dispose();
 					
 				} catch (Exception e) {

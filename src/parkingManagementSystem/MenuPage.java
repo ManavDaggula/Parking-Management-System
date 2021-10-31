@@ -71,8 +71,8 @@ public class MenuPage implements ActionListener{
         menuFrame.add(menuBar);
         menuFrame.add(imageLabel);
         menuFrame.setIconImage(new ImageIcon("src/images/CarParking.png").getImage());
-        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-    	menuFrame.setBounds(0,0,d.width,d.height);
+        //Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+    	//menuFrame.setBounds(0,0,d.width,d.height);
         menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menuFrame.setVisible(true);
     }

@@ -11,36 +11,36 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class DisplayParkingLot {
 	
 	JFrame frame;
-	JLabel label;
+	JLabel label,temp1,temp2,temp3;
 	JTable table;
 	JScrollPane sp;
 	
 	public String[][] getDataMatrix(){
-		String[][] data= {{"","","",""}};
+		String[][] data= {{"","",""}};
 		int count=0,i=0;
 		
 		ConnectionToMySQL c = new ConnectionToMySQL();
 		String query;
 		try{
-			query = "select count(space_id) from parking_space;";
+			query = "select count(spot_name) from parking_lot_space;";
 			ResultSet rs = c.s.executeQuery(query);
 			rs.next();
 			count = rs.getInt(1);
-			data = new String[count][4];
-			query = "select space_id,name,vehicle_parked from parking_space;";
+			data = new String[count][3];
+			query = "select spot_name, occupancy from parking_lot_space;";
 			rs = c.s.executeQuery(query);
 			while(rs.next()) {
-				data[i][0] = ""+rs.getInt(1);
-				data[i][1] = rs.getString(2);
-				data[i][3] = rs.getString(3);
-				if(data[i][3]==null)
-					data[i][2]="Available";
+				data[i][0] = rs.getString(1);
+				data[i][2] = rs.getString(2);
+				if(data[i][2]==null)
+					data[i][1]="Available";
 				else
-					data[i][2]="Occupied";
+					data[i][1]="Occupied";
 				i++;
 			}
 			
@@ -56,10 +56,14 @@ public class DisplayParkingLot {
 	DisplayParkingLot(){
 		
 		label = new JLabel("Parking slots");
-		label.setFont(new Font("Tahoma",Font.BOLD,20));
+		label.setFont(new Font("Tahoma",Font.BOLD,25));
 		label.setHorizontalAlignment(JLabel.CENTER);
 		
-		String[] columns = {"Customer ID","Name","Occupancy","Vehicle_Parked"};
+		temp1 = new JLabel();
+		temp2 = new JLabel();
+		temp3 = new JLabel();
+		
+		String[] columns = {"Spot","Occupancy","Vehicle_Parked"};
 		String rows[][] = this.getDataMatrix();
 		
 		table = new JTable(rows,columns);
@@ -67,13 +71,21 @@ public class DisplayParkingLot {
 		//table.setEnabled(false);
 		table.setDefaultEditor(Object.class, null);
 		
+		DefaultTableCellRenderer r = new DefaultTableCellRenderer();
+		r.setBackground(new Color(0,200,220));
+		table.getColumnModel().getColumn(1).setCellRenderer(r);
+		//table.getColumnModel().getColumn(2).setCellRenderer(r);
+		
 		sp = new JScrollPane(table);
 		
 		frame = new JFrame();
-		frame.setLayout(new BorderLayout(50,50));
+		frame.setLayout(new BorderLayout(10,10));
 		
 		frame.add(label,BorderLayout.NORTH);
 		frame.add(sp,BorderLayout.CENTER);
+		frame.add(temp1,BorderLayout.EAST);
+		frame.add(temp2,BorderLayout.WEST);
+		frame.add(temp3,BorderLayout.SOUTH);
 		
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setVisible(true);
