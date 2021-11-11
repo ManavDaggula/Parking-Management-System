@@ -75,8 +75,8 @@ public class Dashboard extends JFrame implements ActionListener {
 		JLabel l2 = new JLabel("P A R K I N G");
 		l2.setHorizontalAlignment(JLabel.CENTER);
 		l2.setBounds((d.width-400)/2,5, 400, 200);
-		l2.setForeground(Color.YELLOW);
-		l2.setFont(new Font("serif", Font.ITALIC, 60));
+		l2.setForeground(new Color(207, 168, 54));
+		l2.setFont(new Font("Seoge Script", Font.ITALIC, 60));
 		l1.add(l2);
 		
 		setLayout(null);

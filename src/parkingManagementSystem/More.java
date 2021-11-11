@@ -3,9 +3,12 @@ package parkingManagementSystem;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class More extends JFrame implements ActionListener{
 	JButton b1, b2, b3, b4, b5;
@@ -47,10 +50,17 @@ public class More extends JFrame implements ActionListener{
 		b5.addActionListener(this);
 		add(b5);
 		
+		ImageIcon i1 = new ImageIcon("src/images/sixth.jpg");
+		Image i2 = i1.getImage().getScaledInstance(450, 350, Image.SCALE_DEFAULT);
+		ImageIcon i3 = new ImageIcon(i2);
+		JLabel l1 = new JLabel(i3);
+		l1.setBounds(250, 10, 450, 350);
+		add(l1);
+		
 		getContentPane().setBackground(Color.WHITE);
 		
 		setLayout(null);
-		setBounds(370, 200, 725, 340);
+		setBounds(400, 200, 725, 340);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}

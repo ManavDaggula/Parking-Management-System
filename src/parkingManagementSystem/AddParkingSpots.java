@@ -33,6 +33,8 @@ public class AddParkingSpots extends JFrame implements ActionListener {
 		add(available);
 		
 		c1 = new JComboBox(new String[] {"Available", "Occupied"});
+		c1.setEditable(false);
+		//c1.setEnabled(false);
 		c1.setBounds(250,160,150,30);
 		c1.setBackground(Color.WHITE);
 		add(c1);
@@ -42,7 +44,8 @@ public class AddParkingSpots extends JFrame implements ActionListener {
 		price.setFont(new Font ("Tahoma", Font.PLAIN , 17));
 		add(price);
 		
-		t2 = new JTextField();
+		t2 = new JTextField("50");
+		t2.setEditable(false);
 		t2.setBounds(250, 220, 150,30);
 		add(t2);
 		
@@ -72,8 +75,8 @@ public class AddParkingSpots extends JFrame implements ActionListener {
 		setLayout(null);
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		setBounds((d.width-1000)/2,(d.height-450)/2,1000,450);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	public void actionPerformed(ActionEvent ae) {
 
@@ -96,6 +99,7 @@ public class AddParkingSpots extends JFrame implements ActionListener {
 			}
 		}else if(ae.getSource() == b2) {
 			this.setVisible(false);
+			this.dispose();
 		}
 
 	}
