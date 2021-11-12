@@ -22,8 +22,12 @@ public class Dashboard extends JFrame implements ActionListener {
 	JMenuBar mb;
 	JMenu m1, m2, m3, m5;
 	JMenuItem i1, i2, i3,i4,i5;
+	//JLabel occupancyIndicator;
 	
 	Dashboard(){
+		
+		//occupancyIndicator = new JLabel("");
+		
 		
 		mb = new JMenuBar();
 		add(mb);

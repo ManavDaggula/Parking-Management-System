@@ -28,7 +28,7 @@ public class SignInScreen {
 		f = new JFrame();
 		f.getContentPane().setBackground(Color.WHITE);
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		f.setBounds((d.width-550)/2,(d.height-450)/2,550,450);
+		f.setBounds((d.width-550)/2,(d.height-400)/2,550,400);
 		
 		userImage = new JLabel();
 		userImage.setIcon(new ImageIcon("src/images/UserIcon.png"));
