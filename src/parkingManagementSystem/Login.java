@@ -22,7 +22,7 @@ public class Login {
 	Login(){
 	//this.loginScreen.setResizable(false);
 	loginScreen.setLayout(null);
-	backImage.setIcon(new ImageIcon("src/images/login.jpeg"));
+	backImage.setIcon(new ImageIcon(ClassLoader.getSystemResource("images/login.jpeg")));
 	backImage.setBounds(0,0,600, 390);
 	nextButton.setBounds(450,305,100,28);
 	nextButton.setBackground(new Color(0,0,0));

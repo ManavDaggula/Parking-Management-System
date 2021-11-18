@@ -53,14 +53,14 @@ public class EntryPage implements ActionListener{
 		//pNoL.setOpaque(true);
 		//pNoL.setBackground(Color.BLACK);
 		imageLabel1 = new JLabel();
-		ImageIcon i1 = new ImageIcon("src/images/Entry1.png");
+		ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("images/Entry1.png"));
 		Image i2 = i1.getImage();
 		Image i3 = i2.getScaledInstance(150,150,Image.SCALE_DEFAULT);
 		i1 = new ImageIcon(i3);
 		imageLabel1.setIcon(i1);
 		imageLabel1.setBounds(550,140,150,150);
 		imageLabel2 = new JLabel();
-		i1 = new ImageIcon("src/images/Entry2.png");
+		i1 = new ImageIcon(ClassLoader.getSystemResource("images/Entry2.png"));
 		i2 = i1.getImage();
 		i3 = i2.getScaledInstance(250,100,Image.SCALE_DEFAULT);
 		i1 = new ImageIcon(i3);

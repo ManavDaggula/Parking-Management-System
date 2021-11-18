@@ -88,7 +88,7 @@ public class fare extends JFrame implements ActionListener {
 		add(b2);
 		b2.addActionListener(this);
 		
-		ImageIcon i1= new ImageIcon(ClassLoader.getSystemResource("images/MONEY_a.png"));
+		ImageIcon i1= new ImageIcon(ClassLoader.getSystemResource("images/money_a.png"));
 		Image i2=i1.getImage().getScaledInstance(200,180,Image.SCALE_DEFAULT);
 		ImageIcon i3= new ImageIcon(i2);
 		JLabel j4=new JLabel(i3);

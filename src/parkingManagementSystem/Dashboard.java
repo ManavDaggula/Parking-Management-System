@@ -68,7 +68,7 @@ public class Dashboard extends JFrame implements ActionListener {
 		
 		mb.setBounds(0,0,1950,30);
 		
-		ImageIcon i1 = new ImageIcon("src/images/EmptyParkingLot.jpg");
+		ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("images/EmptyParkingLot.jpg"));
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		Image i2 = i1.getImage().getScaledInstance(d.width, d.height, Image.SCALE_DEFAULT);
 		ImageIcon i3 = new ImageIcon(i2);

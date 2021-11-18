@@ -50,7 +50,7 @@ public class More extends JFrame implements ActionListener{
 		b5.addActionListener(this);
 		add(b5);
 		
-		ImageIcon i1 = new ImageIcon("src/images/sixth.jpg");
+		ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("images/sixth.jpg"));
 		Image i2 = i1.getImage().getScaledInstance(450, 350, Image.SCALE_DEFAULT);
 		ImageIcon i3 = new ImageIcon(i2);
 		JLabel l1 = new JLabel(i3);
@@ -78,7 +78,8 @@ public class More extends JFrame implements ActionListener{
 			this.dispose();
 		}
 		else if(ae.getSource()==b4) {
-			
+			new SearchVehicle();
+			this.dispose();
 		}
 		else if(ae.getSource()==b5) {
 			new SignInScreen();

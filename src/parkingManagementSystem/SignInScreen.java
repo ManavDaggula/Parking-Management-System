@@ -31,7 +31,7 @@ public class SignInScreen {
 		f.setBounds((d.width-550)/2,(d.height-400)/2,550,400);
 		
 		userImage = new JLabel();
-		userImage.setIcon(new ImageIcon("src/images/UserIcon.png"));
+		userImage.setIcon(new ImageIcon(ClassLoader.getSystemResource("images/UserIcon.png")));
 		userImage.setBounds(270,50,225,225);
 		f.add(userImage);
 
